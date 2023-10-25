@@ -23,7 +23,11 @@ plot(X(1, :));
 plot(X(2, :));
 plot(X(3, :));
 plot(X(4, :));
+title("SIRD model descirbed in textbook");
 legend("Susceptible", "Infected", "Recovered", "Deceased");
+% This model converges to 10% of the population dying, and the other 90%
+% being immune. 
+
 
 % Question 2: modyifing model, so reinfections possible for everyone
 XReinfectionsPossible = zeros(3, 1600);
@@ -42,4 +46,8 @@ hold on;
 plot(XReinfectionsPossible(1, :));
 plot(XReinfectionsPossible(2, :));
 plot(XReinfectionsPossible(3, :));
+title("Modified Model: Reinfections Possible");
 legend("Susceptible", "Infected", "Deceased");
+% This model converges to a state where everyone dies, since when someone
+% gets sick, they either die or become susceptible again, so everyone will
+% either die or keep getting sick and eventually die. 
