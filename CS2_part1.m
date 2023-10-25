@@ -26,7 +26,7 @@ plot(X(4, :));
 title("SIRD model descirbed in textbook");
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 % This model converges to 10% of the population dying, and the other 90%
-% being immune. 
+% being immune. The model converges a little after 100 days. 
 
 
 % Question 2: modyifing model, so reinfections possible for everyone
@@ -50,4 +50,5 @@ title("Modified Model: Reinfections Possible");
 legend("Susceptible", "Infected", "Deceased");
 % This model converges to a state where everyone dies, since when someone
 % gets sick, they either die or become susceptible again, so everyone will
-% either die or keep getting sick and eventually die. 
+% either die or keep getting sick and eventually die. This model takes a
+% lot longer to converge, a little over 1400 days. 
