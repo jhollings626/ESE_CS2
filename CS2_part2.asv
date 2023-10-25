@@ -1,0 +1,7 @@
+load("COVID_STL.mat");
+
+A = [0.95 0.04 0 0; 0.05 0.85 0 0; 0 0.1 1 0; 0 0.01 0 1];
+B = zeros(4,1);
+
+x0 = [POP_STL - cases_STL(1), cases_STL(1), 0, 0]; %build initial state vector, 
+% assuming pop composed only of susceptible and recovered individuals
