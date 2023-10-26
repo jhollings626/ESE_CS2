@@ -25,7 +25,7 @@ x0 = [(POP_STL * percentNormal); (POP_STL * percentAtRisk); 6; 1; 0;0];
 
 
 sys_sir_base = ss(A,B,eye(6) ,zeros(6,1),1);
-Y = lsim(sys_sir_base,zeros(1000,1),linspace(0,999,1000),x0);
+Y = lsim(sys_sir_base,zeros(158*7,1),linspace(0,158*7 - 1,158*7),x0); %simulate for all 158 weeks of spread
 origY = Y;
 Y = Y/POP_STL; %convert SIRD values to a fraction of the whole STL population
 % plot the output trajectory
@@ -33,19 +33,20 @@ figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:100,1:6));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
-title('St. Louis COVID Model for First 100 Days of Spread')
+title('St. Louis COVID Model for 994 Days of Spread')
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
+
 
 %994 days in 142 weeks, so let's take the first 142 weeks of the cases
 %casesFraction = cases_STL / POP_STL; %create new case vector storing cases as fraction of whole population
 %plot(casesFraction(1:100));
 
-dailyDates = linspace(dates(1),dates(142),142*7); %create 994 daily dates spanning the range in question
+dailyDates = linspace(dates(1),dates(end),length(dates)*7); %create 158*7 daily dates spanning the range in question
 figure;
 hold on;
-plot(dailyDates,origY(1:994,6));
-plot(dates(1:142),cases_STL(1:142));
+plot(dailyDates,origY(1:end,6));
+plot(dates,cases_STL);
 legend('model','actual');
 ylim auto;
