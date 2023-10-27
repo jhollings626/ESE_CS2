@@ -1,0 +1,47 @@
+**Column 1 (Effects of 'normal' population on each state):**
+1. \( A(1,1) \): Percentage of the 'normal' population that stays 'normal'.
+2. \( A(2,1) \): Percentage of the 'normal' population that becomes 'vulnerable'.
+3. \( A(3,1) \): Percentage of the 'normal' population that gets infected and becomes 'Normalinfected'.
+4. \( A(4,1) \): Percentage of the 'normal' population that gets infected and becomes 'vulnerableInfected'.
+5. \( A(5,1) \): Percentage of the 'normal' population that dies.
+6. \( A(6,1) \): Percentage of the 'normal' population that contributes to the 'cumulative cases'.
+
+**Column 2 (Effects of 'vulnerable' population on each state):**
+1. \( A(1,2) \): Percentage of the 'vulnerable' population that becomes 'normal'.
+2. \( A(2,2) \): Percentage of the 'vulnerable' population that stays 'vulnerable'.
+3. \( A(3,2) \): Percentage of the 'vulnerable' population that gets infected and becomes 'Normalinfected'.
+4. \( A(4,2) \): Percentage of the 'vulnerable' population that gets infected and becomes 'vulnerableInfected'.
+5. \( A(5,2) \): Percentage of the 'vulnerable' population that dies.
+6. \( A(6,2) \): Percentage of the 'vulnerable' population that contributes to the 'cumulative cases'.
+
+**Column 3 (Effects of 'Normalinfected' population on each state):**
+1. \( A(1,3) \): Percentage of the 'Normalinfected' that becomes 'normal'.
+2. \( A(2,3) \): Percentage of the 'Normalinfected' that becomes 'vulnerable'.
+3. \( A(3,3) \): Percentage of the 'Normalinfected' that stays 'Normalinfected'.
+4. \( A(4,3) \): Percentage of the 'Normalinfected' that becomes 'vulnerableInfected'.
+5. \( A(5,3) \): Percentage of the 'Normalinfected' that dies.
+6. \( A(6,3) \): Percentage of the 'Normalinfected' that contributes to the 'cumulative cases'.
+
+**Column 4 (Effects of 'vulnerableInfected' population on each state):**
+1. \( A(1,4) \): Percentage of the 'vulnerableInfected' that becomes 'normal'.
+2. \( A(2,4) \): Percentage of the 'vulnerableInfected' that becomes 'vulnerable'.
+3. \( A(3,4) \): Percentage of the 'vulnerableInfected' that becomes 'Normalinfected'.
+4. \( A(4,4) \): Percentage of the 'vulnerableInfected' that stays 'vulnerableInfected'.
+5. \( A(5,4) \): Percentage of the 'vulnerableInfected' that dies.
+6. \( A(6,4) \): Percentage of the 'vulnerableInfected' that contributes to the 'cumulative cases'.
+
+**Column 5 (Effects of 'Dead' population on each state):**
+1. \( A(1,5) \): Percentage of the 'Dead' population that becomes 'normal'.
+2. \( A(2,5) \): Percentage of the 'Dead' population that becomes 'vulnerable'.
+3. \( A(3,5) \): Percentage of the 'Dead' population that becomes 'Normalinfected'.
+4. \( A(4,5) \): Percentage of the 'Dead' population that becomes 'vulnerableInfected'.
+5. \( A(5,5) \): Percentage of the 'Dead' population that stays 'Dead'.
+6. \( A(6,5) \): Percentage of the 'Dead' population that contributes to the 'cumulative cases'.
+
+**Column 6 (Effects of 'cumulative cases' population on each state):**
+1. \( A(1,6) \): Percentage of the 'cumulative cases' population that becomes 'normal'.
+2. \( A(2,6) \): Percentage of the 'cumulative cases' population that becomes 'vulnerable'.
+3. \( A(3,6) \): Percentage of the 'cumulative cases' population that becomes 'Normalinfected'.
+4. \( A(4,6) \): Percentage of the 'cumulative cases' population that becomes 'vulnerableInfected'.
+5. \( A(5,6) \): Percentage of the 'cumulative cases' population that dies.
+6. \( A(6,6) \): Percentage of the 'cumulative cases' population that stays as 'cumulative cases'.
