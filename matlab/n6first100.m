@@ -64,11 +64,13 @@ xlabel('Date');
 error = 0;
 samples = 0;
 for i = 1:7:d %below is used for calculating error between model and actual
-    modeledCases = origY(i,6);
-    actualCases = cases_STL(i);
+    samples = samples + 1; %increment samples used to track number of tests, important bc working w/ multiples of 7
+    %we can also use the above count variable to access weekly entries in
+    %cases_STL
+    modeledCases = origY(i,6); %access a point from each week, reported on the same day as the actual data
+    actualCases = cases_STL(samples); %cases STL contains weekly data
     tempError = ((modeledCases - actualCases) / actualCases) * 100; %calculate weekly error
     error = error + tempError;
-    samples = samples + 1; %increment samples used to track number of tests, important bc working w/ multiples of 7
 end
 
 error = error/samples;
