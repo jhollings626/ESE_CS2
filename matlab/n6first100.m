@@ -5,12 +5,12 @@ n = 6; %variable for dimensionality of A
 d = 100; %number of days to simulate for
 
 A = [
-    0.990 0.000 0.055 0.005 0.000 0.000;
-    0.000 0.998 0.000 0.020 0.000 0.000;
-    0.009 0.001 0.935 0.005 0.000 0.000; 
-    0.001 0.001 0.005 0.960 0.000 0.000; 
-    0.000 0.000 0.005 0.010 1.000 0.000; 
-    0.010 0.005 0.000 0.000 0.000 1.000;  
+    0.9985 0.0000 0.040 0.005 0.000 0.000;
+    0.0000 0.9995 0.000 0.020 0.000 0.000;
+    0.0015 0.0000 0.953 0.005 0.000 0.000; 
+    0.0000 0.0005 0.000 0.960 0.000 0.000; 
+    0.0000 0.0000 0.007 0.010 1.000 0.000; 
+    0.0015 0.0005 0.000 0.000 0.000 1.000;  
 ];
 
 
@@ -60,3 +60,16 @@ legend('model','actual');
 title('Daily Cases As Fraction of Population From 3/18/20 - 6/24/20');
 ylabel('Fraction of Population');
 xlabel('Date');
+
+error = 0;
+samples = 0;
+for i = 1:7:d %below is used for calculating error between model and actual
+    modeledCases = origY(i,6);
+    actualCases = cases_STL(i);
+    tempError = ((modeledCases - actualCases) / actualCases) * 100; %calculate weekly error
+    error = error + tempError;
+    samples = samples + 1; %increment samples used to track number of tests, important bc working w/ multiples of 7
+end
+
+error = error/samples;
+fprintf('Average Percent Error: %.2f%%\n', error);
