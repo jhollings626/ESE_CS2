@@ -17,13 +17,13 @@ for t = 2:210
     X(:, t) = A*X(:, t-1);
 end
 
-
+figure;
 hold on;
 plot(X(1, :));
 plot(X(2, :));
 plot(X(3, :));
 plot(X(4, :));
-title("SIRD model descirbed in textbook");
+title("SIRD model described in textbook");
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 % This model converges to 10% of the population dying, and the other 90%
 % being immune. The model converges a little after 100 days. 
