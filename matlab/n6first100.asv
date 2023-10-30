@@ -5,12 +5,12 @@ n = 6; %variable for dimensionality of A
 d = 100; %number of days to simulate for
 
 A = [
-    0.9985 0.0000 0.040 0.005 0.000 0.000;
-    0.0000 0.9995 0.000 0.020 0.000 0.000;
-    0.0015 0.0000 0.953 0.005 0.000 0.000; 
-    0.0000 0.0005 0.000 0.960 0.000 0.000; 
-    0.0000 0.0000 0.007 0.010 1.000 0.000; 
-    0.0015 0.0005 0.000 0.000 0.000 1.000;  
+    0.99992 0.000000 0.040 0.005 0.000 0.000;
+    0.000000 0.999980 0.000 0.020 0.000 0.000;
+    0.000080 0.000000 0.953 0.005 0.000 0.000; 
+    0.000000 0.000020 0.000 0.960 0.000 0.000; 
+    0.000000 0.000000 0.004 0.012 1.000 0.000; 
+    0.000080 0.000020 0.000 0.000 0.000 1.000;  
 ];
 
 
@@ -55,8 +55,11 @@ figure;
 hold on;
 plot(dailyDates(1:d),origY(1:d,n) / POP_STL); %could also just plot against Y, but this makes more sense to somebody reading through code
 plot(dates(1:15),cases_STL(1:15) / POP_STL); %need to build this such taht it is same length as number of days that we want to store so we can plot them together
+
+plot(dates(1:15),deaths_STL(1:15)/POP_STL);
+plot(dailyDates(1:d),origY(1:d,5) / POP_STL);
 xlim([startDate endDate]);
-legend('model','actual');
+legend('model','actual','actual deaths','modeled deaths');
 title('Daily Cases As Fraction of Population From 3/18/20 - 6/24/20');
 ylabel('Fraction of Population');
 xlabel('Date');
