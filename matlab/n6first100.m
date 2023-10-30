@@ -55,8 +55,11 @@ figure;
 hold on;
 plot(dailyDates(1:d),origY(1:d,n) / POP_STL); %could also just plot against Y, but this makes more sense to somebody reading through code
 plot(dates(1:15),cases_STL(1:15) / POP_STL); %need to build this such taht it is same length as number of days that we want to store so we can plot them together
+
+plot(dates(1:15),deaths_STL(1:15)/POP_STL);
+plot(dailyDates(1:d),origY(1:d,5) / POP_STL);
 xlim([startDate endDate]);
-legend('model','actual');
+legend('model','actual','actual deaths','modeled deaths');
 title('Daily Cases As Fraction of Population From 3/18/20 - 6/24/20');
 ylabel('Fraction of Population');
 xlabel('Date');
