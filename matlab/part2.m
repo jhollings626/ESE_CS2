@@ -233,11 +233,15 @@ fprintf('Second Range Deaths Average Percent Error: %.2f%%\n', deathsError);
 %---------------------------------------------------------------------- 
 A = [ %reduced A matrix using values for the omicron period. Infections and Deaths are 25% less common 
     %than in the original model w/ 0.06% error compared to actual case data
-    0.999550 0.000000 0.037025 0.000000 0.000 0.000;
-    0.000000 0.999888 0.000000 0.025090 0.000 0.000;
+    %this is accomplished by simply reducing infection rate by 25%, as 25%
+    %less people will die as a result of this change so no need to mess
+    %with the numbers for deaths as well
+    
+    0.999550 0.000000 0.037000 0.000000 0.000 0.000;
+    0.000000 0.999888 0.000000 0.025015 0.000 0.000;
     0.000450 0.000000 0.962900 0.000000 0.000 0.000; 
     0.000000 0.000112 0.000000 0.974700 0.000 0.000; 
-    0.000000 0.000000 0.000075 0.000225 1.000 0.000; %death row. haha get it
+    0.000000 0.000000 0.000100 0.000300 1.000 0.000; %death row. haha get it
     0.000450 0.000112 0.000000 0.000000 0.000 1.000;  
 ]; 
 
@@ -289,3 +293,8 @@ title('Omicron Cases with Policy Implemented');
 ylabel('Fraction of Population');
 xlabel('Date');
 hold off;
+
+%% Policy Design Questions
+%(a) What is your policy? How is it implemented mathematically in the model? Does it achieve the desired effect?
+%Our p
+%(b) Is your policy feasible? In other words, will the societal costs be too great for this policy to bevworthwhile?
