@@ -236,7 +236,7 @@ A = [ %reduced A matrix using values for the omicron period. Infections and Deat
     %this is accomplished by simply reducing infection rate by 25%, as 25%
     %less people will die as a result of this change so no need to mess
     %with the numbers for deaths as well
-    
+
     0.999550 0.000000 0.037000 0.000000 0.000 0.000;
     0.000000 0.999888 0.000000 0.025015 0.000 0.000;
     0.000450 0.000000 0.962900 0.000000 0.000 0.000; 
@@ -296,5 +296,20 @@ hold off;
 
 %% Policy Design Questions
 %(a) What is your policy? How is it implemented mathematically in the model? Does it achieve the desired effect?
-%Our p
+%Our policy is a mask mandate that requires all individuals in St. Louis to
+%wear a protective face covering when in public. The impact of this policy
+%is represented mathematically in our lower infection rates (decreased by
+%25% from the standard model). As a result of this change, 25% less normal
+%and 25% less vulnerable individuals become infected with Covid in our
+%updated model. The policy does achieve the desired effect, as our plots of
+%the updated model show considerably less cases and deaths compared to the
+%actual data given to us. Less deaths and less infections is the goal of
+%the policy, so this marks it as successful.
 %(b) Is your policy feasible? In other words, will the societal costs be too great for this policy to bevworthwhile?
+%Our policy is almost certainly feasible. By way of mandating masks, we
+%prevent thousands of infections and save hundreds of lives. The impact of
+%this is multifaceted. By preventing infections, St. Louis is more
+%economically productive. However, saving lives is obviously paramount and
+%is something that is accomplished with a relatively simple task as we
+%demonstrate in our updated model, marking this policy as worthwhile when
+%compared to its minimal social cost.
