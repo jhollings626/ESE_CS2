@@ -1,8 +1,8 @@
-%model of spread over first 100 days for n = 6
+
 load("COVID_STL.mat");
 
 n = 6; %variable for dimensionality of A
-
+%% Begin delta date range
 A = [
     0.999750 0.000000 0.037000 0.000000 0.000 0.000;
     0.000000 0.999938 0.000000 0.020000 0.000 0.000;
@@ -13,7 +13,6 @@ A = [
 ];
 
 B = zeros(n,1);
-
 percentAtRisk = 0.14;
 percentNormal = 1 - percentAtRisk;
 
@@ -50,7 +49,7 @@ figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:d,1:n));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
-title('St. Louis COVID Model For First 100 Days of Spread')
+title('St. Louis COVID Model For Period 10/27/21 - 3/22/22')
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
@@ -116,18 +115,19 @@ end
 deathsError = deathsError/samples;
 fprintf('First Range Deaths Average Percent Error: %.2f%%\n', deathsError);
 
+%%
 %------------------------------------------------------------------
-%end first date range
+%begin omicron data range
 %------------------------------------------------------------------
-%% 
+
 
 A = [ %begin by rebuilding A to reflect changes in case trajectories in 10/27/21 - 3/22/22 time range
-    0.999750 0.000000 0.037000 0.000000 0.000 0.000;
-    0.000000 0.999938 0.000000 0.020000 0.000 0.000;
-    0.000250 0.000000 0.962900 0.005015 0.000 0.000; 
-    0.000000 0.000062 0.000000 0.974700 0.000 0.000; 
+    0.999400 0.000000 0.037000 0.000000 0.000 0.000;
+    0.000000 0.999850 0.000000 0.020000 0.000 0.000;
+    0.000600 0.000000 0.962900 0.005015 0.000 0.000; 
+    0.000000 0.000150 0.000000 0.974700 0.000 0.000; 
     0.000000 0.000000 0.000100 0.000300 1.000 0.000; %death 
-    0.000250 0.000062 0.000000 0.000000 0.000 1.000;  
+    0.000600 0.000150 0.000000 0.000000 0.000 1.000;  
 ];
 
 
@@ -162,7 +162,7 @@ figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:d,1:n));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
-title('St. Louis COVID Model For First 100 Days of Spread')
+title('St. Louis COVID Model For Period 10/27/21 - 3/22/22')
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
@@ -175,7 +175,7 @@ hold on;
 plot(dailyDates(startDateIndex:endDateIndex - 1),origY(1:d,5) / POP_STL);
 plot(dates(weekIndexSTART:weekIndexEND),deaths_STL(weekIndexSTART:weekIndexEND)/POP_STL);
 xlim([startDate endDate]);
-title('Total Deaths As Fraction of Population From 6/30/21 - 10/26/21');
+title('Total Deaths As Fraction of Population From 10/27/21 - 3/22/22');
 legend('Modeled Deaths','Actual Deaths');
 ylabel('Fraction of Population');
 xlabel('Date');
@@ -186,7 +186,7 @@ plot(dailyDates(startDateIndex:endDateIndex -1),origY(1:d,n) / POP_STL); %trust 
 plot(dates(weekIndexSTART:weekIndexEND),cases_STL(weekIndexSTART:weekIndexEND) / POP_STL); %need to build this such taht it is same length as number of days that we want to store so we can plot them together
 legend('Modeled Cases', 'Actual Cases');
 xlim([startDate endDate]);
-title('Total Cases As Fraction of Population From 6/30/21 - 10/26/21');ylabel('Fraction of Population');
+title('Total Cases As Fraction of Population From 10/27/22 - 3/22/22');ylabel('Fraction of Population');
 ylabel('Fraction of Population');
 xlabel('Date');
 hold off;
@@ -207,7 +207,7 @@ for i = 1:7:d %below is used for calculating error between model and actual
     funnyWeekIndex = funnyWeekIndex + 1; %for indexing into weekly data
 end
 casesError = casesError/samples;
-fprintf('First Range Cases Average Percent Error: %.2f%%\n', casesError);
+fprintf('Second Range Cases Average Percent Error: %.2f%%\n', casesError);
 
 
 deathsError = 0;
@@ -225,4 +225,8 @@ for i = 1:7:d %below is used for calculating error between model and actual
 end
 
 deathsError = deathsError/samples;
-fprintf('First Range Deaths Average Percent Error: %.2f%%\n', deathsError);
+fprintf('Second Range Deaths Average Percent Error: %.2f%%\n', deathsError);
+
+%-----------------------------------------------------------------------
+% begin policy analysis
+%---------------------------------------------------------------------- 
