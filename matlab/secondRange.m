@@ -4,12 +4,12 @@ load("COVID_STL.mat");
 n = 6; %variable for dimensionality of A
 
 A = [
-    0.999922 0.000000 0.040 0.005 0.000 0.000;
-    0.000000 0.999980 0.000 0.020 0.000 0.000;
-    0.000078 0.000000 0.953 0.005 0.000 0.000; 
-    0.000000 0.000020 0.000 0.960 0.000 0.000; 
-    0.000000 0.000000 0.001 0.003 1.000 0.000; 
-    0.000078 0.000020 0.000 0.000 0.000 1.000;  
+    0.999750 0.000000 0.037000 0.000000 0.000 0.000;
+    0.000000 0.999938 0.000000 0.020000 0.000 0.000;
+    0.000250 0.000000 0.962900 0.005015 0.000 0.000; 
+    0.000000 0.000062 0.000000 0.974700 0.000 0.000; 
+    0.000000 0.000000 0.000100 0.000300 1.000 0.000; %death 
+    0.000250 0.000062 0.000000 0.000000 0.000 1.000;  
 ];
 
 B = zeros(n,1);
@@ -82,18 +82,36 @@ hold off;
 
 
 
-error = 0;
+casesError = 0;
 samples = 0;
+funnyWeekIndex = weekIndexSTART; %we need 2 of these for each error calculation, this one gonna get incremented
 for i = 1:7:d %below is used for calculating error between model and actual
     samples = samples + 1; %increment samples used to track number of tests, important bc working w/ multiples of 7
     %we can also use the above count variable to access weekly entries in
     %cases_STL
     modeledCases = origY(i,6); %access a point from each week, reported on the same day as the actual data
-    actualCases = cases_STL(weekIndexSTART); %cases STL contains weekly data
+    actualCases = cases_STL(funnyWeekIndex); %cases STL contains weekly data
     tempError = ((modeledCases - actualCases) / actualCases) * 100; %calculate weekly error
-    error = error + tempError;
-    weekIndexSTART = weekIndexSTART + 1; %for indexing into weekly data
+    casesError = casesError + tempError;
+    funnyWeekIndex = funnyWeekIndex + 1; %for indexing into weekly data
+end
+casesError = casesError/samples;
+fprintf('Cases Average Percent Error: %.2f%%\n', casesError);
+
+
+deathsError = 0;
+samples = 0;
+funnyWeekIndex = weekIndexSTART;
+for i = 1:7:d %below is used for calculating error between model and actual
+    samples = samples + 1; %increment samples used to track number of tests, important bc working w/ multiples of 7
+    %we can also use the above count variable to access weekly entries in
+    %cases_STL
+    modeledDeaths = origY(i,5); %access a point from each week, reported on the same day as the actual data
+    actualDeaths = deaths_STL(funnyWeekIndex); %deaths STL contains weekly data
+    tempError = ((modeledDeaths - actualDeaths) / actualDeaths) * 100; %calculate weekly error
+    deathsError = deathsError + tempError;
+    funnyWeekIndex = funnyWeekIndex + 1; %for indexing into weekly data
 end
 
-error = error/samples;
-fprintf('Average Percent Error: %.2f%%\n', error);
+deathsError = deathsError/samples;
+fprintf('Deaths Average Percent Error: %.2f%%\n', deathsError);
