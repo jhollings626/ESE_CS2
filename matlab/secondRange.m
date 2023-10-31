@@ -62,7 +62,7 @@ ylim auto; hold off;
 figure;
 hold on;
 plot(dailyDates(startDateIndex:endDateIndex - 1),origY(1:d,5) / POP_STL);
-plot(dates(firstWeek:lastWeek),deaths_STL(firstWeek:lastWeek)/POP_STL);
+plot(dates(weekIndexSTART:weekIndexEND),deaths_STL(weekIndexSTART:weekIndexEND)/POP_STL);
 xlim([startDate endDate]);
 title('Total Deaths As Fraction of Population From 6/30/21 - 10/26/21');
 legend('Modeled Deaths','Actual Deaths');
