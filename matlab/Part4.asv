@@ -1,4 +1,5 @@
 % Before Vaccinations
+load('mockdata2023.mat')
 
 n = 5; %variable for dimensionality of A
 d = 100; %number of days to simulate for
@@ -7,15 +8,15 @@ B = zeros(n,1);
 x0 = [1-newInfections(1)-cumulativeDeaths(1), 0, newInfections(1), 0, cumulativeDeaths(1)];
 
 
-infectionRate = .02;
+infectionRate = 0.02;
 healRate = .1;
-deathRate = .1;
+deathRate = .0047;
 
 APreVax = [1-infectionRate, 0, healRate, 0, 0;
            0, 0, 0, 0, 0; 
            infectionRate, 0, 1-healRate-deathRate, 0, 0;
            0, 0, 0, 0, 0;
-           0, 0, deathRate, 0, 0];
+           0, 0, deathRate, 0, 1];
 
 
 sys_sir_base = ss(APreVax,B,eye(n) ,zeros(n,1),1);
@@ -29,15 +30,15 @@ uvDeathRate = .1;
 
 vInfectionRate = .002;
 vHealRate = .4;
-vDeathRate = .05;
+vDeathRate = .005;
 
 vaxRate = .05;
 
-AWithVax = [1-uvInfectionRate, 0, uvHealRate, 0, 0;
-            vaxRate, 1-vInfectionRate, 0, vHealRate, 0;
-            uvInfectionRate, 0, 1-uvHealRate-uvDeathRate, 0, 0;
-            0, vInfectionRate, 0, 1-vHealRate-vDeathRate, 0;
-            0, 0, uvDeathRate, vDeathRate, 1];
+AWithVax = [1-uvInfectionRate, 0               , uvHealRate              , 0,    0;
+            vaxRate          , 1-vInfectionRate, 0                       , vHealRate, 0;
+            uvInfectionRate  , 0               , 1-uvHealRate-uvDeathRate, 0, 0;
+            0                , vInfectionRate  , 0    , 1-vHealRate-vDeathRate, 0;
+            0                , 0               , vDeathRate, uvDeathRate, 1];
 
 
 sys_sir_base = ss(AWithVax,B,eye(n) ,zeros(n,1),1);
@@ -55,7 +56,7 @@ title("Model");
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
-legend("Unvacinated healthy", "Vacinated healthy", "Unvacinated infected", "Vacinated infected", "Deaths");
+legend("Unvaccinated healthy", "Vaccinated healthy", "Unvaccinated infected", "Vaccinated infected", "Deaths");
 
 
 % Compare model with actual data

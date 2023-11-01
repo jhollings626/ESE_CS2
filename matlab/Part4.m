@@ -8,9 +8,9 @@ B = zeros(n,1);
 x0 = [1-newInfections(1)-cumulativeDeaths(1), 0, newInfections(1), 0, cumulativeDeaths(1)];
 
 
-infectionRate = 0.02;
+infectionRate = 0.0010;
 healRate = .1;
-deathRate = .1;
+deathRate = .12;
 
 APreVax = [1-infectionRate, 0, healRate, 0, 0;
            0, 0, 0, 0, 0; 
@@ -24,21 +24,21 @@ PreVax = lsim(sys_sir_base,zeros(d,1),linspace(0,d - 1,d),x0); %simulate for d d
 
 
 % After Vaccinations
-uvInfectionRate = .02;
+uvInfectionRate = 0.0010;
 uvHealRate = .1;
-uvDeathRate = .1;
+uvDeathRate = .12;
 
-vInfectionRate = .002;
+vInfectionRate = .00025;
 vHealRate = .4;
-vDeathRate = .05;
+vDeathRate = 0.001;
 
-vaxRate = .05;
+vaxRate = 0.026;
 
-AWithVax = [1-uvInfectionRate, 0, uvHealRate, 0, 0;
-            vaxRate, 1-vInfectionRate, 0, vHealRate, 0;
-            uvInfectionRate, 0, 1-uvHealRate-uvDeathRate, 0, 0;
-            0, vInfectionRate, 0, 1-vHealRate-vDeathRate, 0;
-            0, 0, uvDeathRate, vDeathRate, 1];
+AWithVax = [1-uvInfectionRate-vaxRate, 0               , uvHealRate              , 0                     , 0;
+            vaxRate                  , 1-vInfectionRate, 0                       , vHealRate             , 0;
+            uvInfectionRate          , 0               , 1-uvHealRate-uvDeathRate, 0                     , 0;
+            0                        , vInfectionRate  , 0                       , 1-vHealRate-vDeathRate, 0;
+            0                        , 0               , uvDeathRate              ,vDeathRate            , 1];
 
 
 sys_sir_base = ss(AWithVax,B,eye(n) ,zeros(n,1),1);
@@ -56,7 +56,7 @@ title("Model");
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
-legend("Unvacinated healthy", "Vacinated healthy", "Unvacinated infected", "Vacinated infected", "Deaths");
+legend("Unvaccinated healthy", "Vaccinated healthy", "Unvaccinated infected", "Vaccinated infected", "Deaths");
 
 
 % Compare model with actual data
