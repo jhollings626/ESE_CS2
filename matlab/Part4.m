@@ -1,4 +1,5 @@
 % Before Vaccinations
+load('mockdata2023.mat')
 
 n = 5; %variable for dimensionality of A
 d = 100; %number of days to simulate for
@@ -7,7 +8,7 @@ B = zeros(n,1);
 x0 = [1-newInfections(1)-cumulativeDeaths(1), 0, newInfections(1), 0, cumulativeDeaths(1)];
 
 
-infectionRate = 0.000078;
+infectionRate = 0.02;
 healRate = .1;
 deathRate = .1;
 
