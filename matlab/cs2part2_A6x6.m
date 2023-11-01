@@ -27,7 +27,12 @@ B = zeros(n,1);
 %vulnerable population
 percentAtRisk = 0.14;
 percentNormal = 1 - percentAtRisk;
-x0 = [(POP_STL * percentNormal), (POP_STL * percentAtRisk), 6, 1, 0,0];
+x0 = [(POP_STL * percentNormal); 
+      (POP_STL * percentAtRisk);
+      6;
+      1;
+      0;
+      0];
 
 
 sys_sir_base = ss(A,B,eye(n) ,zeros(n,1),1);
@@ -39,7 +44,7 @@ figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:100,1:n));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
-title('St. Louis COVID Model for 994 Days of Spread')
+title('St. Louis COVID Model for First 100 Days of Spread')
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
