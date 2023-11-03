@@ -221,7 +221,7 @@ ylabel('Fraction of Population');
 ylim auto; hold off;
 
 % Now gradually implementing policy:
-Delta = zeros(120, 12);
+
 startDay = 473;
 endDay = 592;
 d=10;
@@ -235,7 +235,7 @@ B = Borig;
 F = [A-A*D C; D B-B*C];
 sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
 Z = lsim(sys_sir_base,zeros(d,1),linspace(startDay,startDay+d-1,d),z0); %simulate for d days of spread
-Delta = cat(1, Delta, Z);
+
 startDay=startDay+d;
 z0 = Z(10, :);
 end
@@ -243,7 +243,7 @@ end
 
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
-plot(Delta(:,1:5));
+plot(Z(:,1:5));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
 title('Delta Wave: Pop 1 woth gradually implemented policy');
 xlabel('Time')
@@ -252,7 +252,7 @@ ylim auto; hold off;
 
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
-plot(Delta(:,7:11));
+plot(Z(:,7:11));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
 title('Delta Wave: Pop 2 with gradually implemented policy');
 xlabel('Time')

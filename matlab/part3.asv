@@ -235,9 +235,9 @@ B = Borig;
 F = [A-A*D C; D B-B*C];
 sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
 Z = lsim(sys_sir_base,zeros(d,1),linspace(startDay,startDay+d-1,d),z0); %simulate for d days of spread
-Delta = cat(1, Delta, Z);
+Delta(120-(120*j/12)+ 1, 120-(120*j/12)+ 1+d) = 
 startDay=startDay+d;
-z0 = Z(j-, :);
+z0 = Z(10, :);
 end
 
 
