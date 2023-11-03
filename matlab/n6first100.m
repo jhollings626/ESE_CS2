@@ -29,7 +29,6 @@ x0 = [
     0
  ];
 
-
 sys_sir_base = ss(A,B,eye(n) ,zeros(n,1),1);
 Y = lsim(sys_sir_base,zeros(d,1),linspace(0,d - 1,d),x0); %simulate for d days of spread
 origY = Y;
@@ -38,7 +37,7 @@ Y = Y/POP_STL; %convert SIRD values to a fraction of the whole STL population
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:d,1:n));
-legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead','Cumulative Cases');
 title('St. Louis COVID Model For First 100 Days of Spread')
 xlabel('Time')
 ylabel('Fraction of Population');

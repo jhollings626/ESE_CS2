@@ -49,7 +49,7 @@ Y = Y/POP_STL; %convert SIRD values to a fraction of the whole STL population
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
 plot(Y(1:d,1:n));
-legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Croaked','Cum');
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead','Cumlative Cases');
 title('St. Louis COVID Model For First 100 Days of Spread')
 xlabel('Time')
 ylabel('Fraction of Population');
