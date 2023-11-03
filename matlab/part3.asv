@@ -221,7 +221,7 @@ ylabel('Fraction of Population');
 ylim auto; hold off;
 
 % Now gradually implementing policy:
-Delta = zeros(120, 12);
+
 startDay = 473;
 endDay = 592;
 d=10;
@@ -235,7 +235,7 @@ B = Borig;
 F = [A-A*D C; D B-B*C];
 sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
 Z = lsim(sys_sir_base,zeros(d,1),linspace(startDay,startDay+d-1,d),z0); %simulate for d days of spread
-Delta(120-(120*j/12)+ 1, 120-(120*j/12)+ 1+d) = 
+
 startDay=startDay+d;
 z0 = Z(10, :);
 end
@@ -243,7 +243,7 @@ end
 
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
-plot(Delta(:,1:5));
+plot(Z(:,1:5));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
 title('Delta Wave: Pop 1 woth gradually implemented policy');
 xlabel('Time')
@@ -252,9 +252,90 @@ ylim auto; hold off;
 
 figure;
 hold on; %toggle hold, plotting multiple curves on the same graph
-plot(Delta(:,7:11));
+plot(Z(:,7:11));
 legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
 title('Delta Wave: Pop 2 with gradually implemented policy');
+xlabel('Time')
+ylabel('Fraction of Population');
+ylim auto; hold off;
+
+% Omicron Wave: Days 593-740
+D=1.5*D;
+A = Aorig;
+B = Borig;
+A = A -A*(D);
+B = B - B*(C);
+F = [A C; D B];
+d=2500;
+sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
+Z = lsim(sys_sir_base,zeros(d,1),linspace(0,d - 1,d),z0); %simulate for d days of spread
+
+z0 = Z(593, :);
+d=740-593+1;
+A = Aorig;
+B = Borig;
+C = Corig;
+D = Dorig;
+F = [A-A*D C; D B-B*C];
+sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
+Z = lsim(sys_sir_base,zeros(d,1),linspace(593,740,d),z0); %simulate for d days of spread
+
+
+figure;
+hold on; %toggle hold, plotting multiple curves on the same graph
+plot(Z(1:d,1:5));
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
+title('Omicron Wave: Pop 1 without policy');
+xlabel('Time')
+ylabel('Fraction of Population');
+ylim auto; hold off;
+
+figure;
+hold on; %toggle hold, plotting multiple curves on the same graph
+plot(Z(1:d,7:11));
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
+title('Omicron Wave: Pop 2 without policy');
+xlabel('Time')
+ylabel('Fraction of Population');
+ylim auto; hold off;
+
+% Now gradually implementing policy:
+
+startDay = 593;
+endDay = 740;
+d=10;
+for j = 12:1
+for i = 1:6
+    C(i, i) = Corig(i, i)*(j/12);
+    D(i, i) = Dorig(i, i)*(j/12);
+end
+A = Aorig;
+B = Borig;
+F = [A-A*D C; D B-B*C];
+sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
+Z = lsim(sys_sir_base,zeros(d,1),linspace(startDay,startDay+d-1,d),z0); %simulate for d days of spread
+
+startDay=startDay+d;
+z0 = Z(10, :);
+end
+
+sys_sir_base = ss(F, zeros(2*n,1),eye(2*n) ,zeros(2*n,1),1);
+Z = lsim(sys_sir_base,zeros(d,1),linspace(startDay,740,d),z0); %simulate for d days of spread
+
+figure;
+hold on; %toggle hold, plotting multiple curves on the same graph
+plot(Z(:,1:5));
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
+title('Omicron Wave: Pop 1 woth gradually implemented policy');
+xlabel('Time')
+ylabel('Fraction of Population');
+ylim auto; hold off;
+
+figure;
+hold on; %toggle hold, plotting multiple curves on the same graph
+plot(Z(:,7:11));
+legend('Normal', 'Vulnerable','Normal Infected','Vulnerable Infected','Dead');
+title('Omicron Wave: Pop 2 with gradually implemented policy');
 xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
