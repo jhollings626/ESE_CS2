@@ -72,4 +72,5 @@ ylabel('Fraction of Population');
 ylim auto; hold off;
 legend("Model Infected", "Model deaths", "Actual infected", "Actual deaths");
 
-vaxpop = 
+vaxpop = model(:,2) + model(:,4); %add vaccinated and vaccinated infected populations on every day
+vaxbreak = model(:,4);
