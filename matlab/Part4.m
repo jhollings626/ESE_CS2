@@ -71,3 +71,5 @@ xlabel('Time')
 ylabel('Fraction of Population');
 ylim auto; hold off;
 legend("Model Infected", "Model deaths", "Actual infected", "Actual deaths");
+
+vaxpop = 
